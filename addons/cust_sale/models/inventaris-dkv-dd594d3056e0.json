@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "inventaris-dkv",
+  "private_key_id": "dd594d3056e0742edb0b992b1666f7799abd1cdc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQDSCJKGBg7cptAX\nHdVT1aPv1lRJYWZkORXih+toXgPtVPj1gHlAFT7y9MRwNzc7aOamIwbF/NNYCkaE\n8aiLIW9Mg9J/WZTrf2sH3sd++2FnkZ2KnQHFNCnyr8KrFR2nGJRVUb3wzKa+96aS\nkv1QBTyoYRqd5/WxJ6uzw4GoQp9UHGn2mmvjjy+hcI2LBcwnL/vyCBtag/N4N2C+\n5Fjd42w4eELQZe4ykixYOeMzh71JAphrw/llJO/q21QVV4GSlGLc1fzTV4eM1Mto\nEuiu25E61zsJd1vL0nl+EwO9UU3ZobI4tYB55dgbpXbPcUUHW/9qx04xMMnx7SLD\n82zsTpZtAgMBAAECgf9VDzLAUJWlMCWdc0LbMM/v0YpB8VXKBL3QrUoK1L0Ns4GY\nJ2gCdUzycj056Zsh1iU4X36Tc9gji8mK74CHMmUVYwIvcuNcmlQ+PZjYvZsl5Y86\nmz0y4/TNxQYZBuUhCo+AlLC5kL6Neid7gBrpRcxDc8Sml+hKdKDRFdxV9XgJnxXs\nxzOc6wtExQw7680qb9r6hmYs0Tj3BTmKZeAcGlZby395C9swT/xbeovxNyDHQTeU\nZ7YXoNFt3UQjrOFpBtRusteV76nZi7ZzbxmRBQmBjH5lRWNcLckXlJw/MM/6uGcC\nyZJuGIe1gHVcMzRyVMGwuwnPYI5QeO5BFbZBXtcCgYEA/vBgRGO/8ssttSBAJ050\nNBwxYENQ7AWlxwgWZ/0vcAmGqwfyV0BxhWEhQyikqrIb+acQ2+Sx5p9mLjksQIyX\nzVJrkw36jGsV4lg7GiW8v7Ms8ldxLYT3kT7wEuQeE2eJjskdBxEq9kCsRUE2G86L\n7fuc3uStXCPgvfyMYvbSZwcCgYEA0uhaFkQI4G8DiOJjXlT8XSQh6H68QETejKLk\nls4FBNkjehJ90OaG6W7LvEVIkqQwoqm+q4+WoCN/7B1ieM4mZ2FQGVPkBw/xz5Q8\n2MZD5DQUmzA+oqjzPWtVD1dUx5H30nhZqukBbQykZBRpjXG74pyDx101Lji8aRXM\nXEYKJesCgYAsg2YbqtsSFp3VeVsaQd2SV7XbXAWeIGJQvT3ETHXi9xbXeBy9VVg8\n9LetFUSjNVQjJCOScX0Kipx5x6vNXX8H77MuywsLR4tbqRIwv5QUWMGpUtFFJGlh\np/6dHc2Oj8556u2xlTLOKn6p3PgIpOjT1dIPLRiD9RPBuH3+raARMwKBgDBrk7Mk\n73zHP+J/RxzzGfUwRHCiGAoRRZ64Dw7oQZK5X0G5WRVKt5KEE1Yn+d9gvqG5osK0\ndnpRbB8DKAZgHcUCPGd0MRfF+1gSyl1iN1f+9PQkAV1KuH1TVPXusNIYmvLBGqT4\nVZF5o4wue4UzpVUDZeWxanIwKGFf1ckhc1b9AoGBAOUlBhNQWcAnwRg3KVRnZoib\ndXTWXHdT94Coji/zgnoxbfDs7fA5gDgA76LdaOxFga+MdDd5InLSq9hjOAss9e2r\nJgDq0IJatk7c1WPvrhZIQ53mvij3YGsa8ES9s12cQ06FlYqAPO4NI2CGTKsHos3m\nRKMJKNAK52r229jcpXm0\n-----END PRIVATE KEY-----\n",
+  "client_email": "inventaris-dkv@inventaris-dkv.iam.gserviceaccount.com",
+  "client_id": "112983621564672816497",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/inventaris-dkv%40inventaris-dkv.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
