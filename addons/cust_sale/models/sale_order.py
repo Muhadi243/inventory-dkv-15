@@ -9,13 +9,13 @@ class SaleOrder(models.Model):
         ('custom', 'Custom'),
     ], store=True)
 
-    @api.onchange('type_product')
-    def _onchange_type_product(self):
-        for line in self.order_line:
-            if self.type_product:
-                line.type_product = self.type_product
-            else:
-                line.type_product = False
+    # @api.onchange('type_product')
+    # def _onchange_type_product(self):
+    #     for line in self.order_line:
+    #         if self.type_product:
+    #             line.type_product = self.type_product
+    #         else:
+    #             line.type_product = False
 
 
     def _prepare_invoice(self):

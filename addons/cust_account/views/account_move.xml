@@ -8,6 +8,11 @@
                 <field name="customer_name" string="Customer Name" attrs="{'invisible': [('type_product','!=','custom')]}" readonly="1"/>
                 <field name="type_product" string="Product Type" readonly="1"/>
             </xpath>
+            <field name="quantity" position="after">
+                <field name="type_product" invisible="1"/>
+                <field name="panjang" string="Panjang" attrs="{'invisible': [('type_product','!=','custom')]}"/>
+                <field name="lebar" string="Lebar" attrs="{'invisible': [('type_product','!=','custom')]}"/>
+            </field>
              <xpath expr="//field[@name='payment_reference']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
