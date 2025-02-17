@@ -32,8 +32,11 @@
     'maintainer': 'Dimas',
     'depends': ['base','sale','sales_team'],
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/sale_order.xml',
+        'views/res_users.xml',
+        'wizard/report_harian.xml',
+        'wizard/report_bulanan.xml',
     ],
     'license': 'AGPL-3',
     'installable': True,

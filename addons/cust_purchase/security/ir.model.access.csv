@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_report_xlsx,purchase.report.xlsx,model_purchase_report_xlsx,,1,1,1,1
+access_daily_purchase_report_xlsx,daily.purchase.report.xlsx,model_daily_purchase_report_xlsx,,1,1,1,1
+access_monthly_purchase_report_xlsx,monthly.purchase.report.xlsx,model_monthly_purchase_report_xlsx,,1,1,1,1

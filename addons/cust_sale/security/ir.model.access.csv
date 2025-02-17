@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_google_drive_config,google.drive.config,model_google_drive_config,,1,1,1,1
+access_sales_report_xlsx,sales.report.xlsx,model_sales_report_xlsx,,1,1,1,1
+access_sales_report_monthly_xlsx,sales.report.monthly.xlsx,model_sales_report_monthly_xlsx,,1,1,1,1

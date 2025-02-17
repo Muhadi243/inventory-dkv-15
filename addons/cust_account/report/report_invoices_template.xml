@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_bc_dkv_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <main style="padding: 40px;">
+                    <div class="page" style="padding: 20px; font-family: Arial, sans-serif;">
+                        <div style="background-color: #D2D0D0; width: 100px; height: 100px;">
+                            <img src="../static/src/img/image.png"/>
+                        </div>
+                        <div class="text-center" style="text-align: center; background-color: #D2D0D0; padding-top: 20px; padding-bottom: 10px; margin-bottom: 20px;">
+                            <h3>FAKTUR</h3>
+                        </div>
+                        <table class="table" style="width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 3px; width: 15%;"><strong>No. Faktur</strong></td>
+                                    <td style="padding: 3px; width: 25%;">: <span t-field="doc.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px; width: 15%;"><strong>Hari/Tanggal</strong></td>
+                                    <td style="padding: 3px; width: 25%;">: <span t-field="doc.invoice_date"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px; width: 15%;"><strong>Jatuh Tempo</strong></td>
+                                    <td style="padding: 3px; width: 25%;">
+                                        <t t-if="doc.invoice_date_due">
+                                            : <span t-field="doc.invoice_date_due"/>
+                                        </t>
+                                        <t t-else="">: -</t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px; width: 15%;"><strong>No. PO</strong></td>
+                                    <td style="padding: 3px; width: 25%;">: <span t-field="doc.origin"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px; width: 15%;"><strong>Pembeli</strong></td>
+                                    <td style="padding: 3px; width: 25%;">: <span t-field="doc.partner_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px; width: 15%;"><strong>Alamat</strong></td>
+                                    <td style="padding: 3px; width: 25%;">
+                                        <t t-if="doc.partner_id.street">
+                                            : <span t-field="doc.partner_id.street"/>
+                                        </t>
+                                        <t t-else="">: -</t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table" border="1" style="width: 100%; margin-top: 20px;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 3px; width: 15%;"><strong>No</strong></th>
+                                    <th style="padding: 3px; width: 25%;"><strong>Item &amp; Deskripsi</strong></th>
+                                    <th style="padding: 3px; width: 15%;"><strong>Jumlah Item</strong></th>
+                                    <th style="padding: 3px; width: 25%;"><strong>Harga Item</strong></th>
+                                    <th style="padding: 3px; width: 15%;"><strong>Jumlah</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="index" t-value="0"/>
+                                <t t-foreach="doc.invoice_line_ids" t-as="line">
+                                    <t t-set="index" t-value="index + 1"/>
+                                    <tr>
+                                        <td style="padding: 3px; width: 15%;"><t t-esc="index"/></td>
+                                        <td style="padding: 3px; width: 25%;"><span t-field="line.name"/></td>
+                                        <td style="padding: 3px; width: 15%;"><span t-field="line.quantity"/></td>
+                                        <td style="padding: 3px; width: 25%;"><span t-field="line.price_unit"/></td>
+                                        <td style="padding: 3px; width: 15%;"><span t-field="line.price_subtotal"/></td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="4" style="padding: 3px; text-align: right;"><strong>Sub Total</strong></td>
+                                    <td style="padding: 3px; text-align: right;">Rp. <span t-field="doc.amount_untaxed"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="padding: 3px; text-align: right;"><strong>Total</strong></td>
+                                    <td style="padding: 3px; text-align: right;">Rp. <span t-field="doc.amount_total"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="padding: 3px; text-align: right;"><strong>Pembayaran Dilakukan</strong></td>
+                                    <td style="padding: 3px; text-align: right;">Rp. </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="padding: 3px; text-align: right;"><strong>Saldo Jatuh Tempo</strong></td>
+                                    <td style="padding: 3px; text-align: right;">Rp. </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-center" style="text-align: center; margin-top: 20px;">Terima kasih telah berbisnis dengan kami</p>
+                    </div>
+                </main>
+            </t>
+        </t>
+    </template>
+</odoo>

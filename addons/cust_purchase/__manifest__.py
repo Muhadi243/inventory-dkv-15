@@ -20,7 +20,7 @@
 #
 ###############################################################################
 {
-    'name': "Custom Account",
+    'name': "Custom Purchase",
     'version': '15.0.1.0.1',
     'category': 'Extra Tools',
     'summary': 'This module helps to create enterprise like app drawer,'
@@ -30,11 +30,13 @@
     'author': 'Dimas',
     'company': 'Dimas',
     'maintainer': 'Dimas',
-    'depends': ['base','account', 'l10n_id_efaktur'],
+    'depends': ['base','purchase'],
     'data': [
-        'views/account_move.xml',
-        'report/report_invoices_template.xml',
-        'report/report_invoices.xml',
+        'security/ir.model.access.csv',
+        'views/purchase_order.xml',
+        'wizard/report_bulanan.xml',
+        'wizard/report_harian.xml',
+        'wizard/report_pengeluaran.xml',
     ],
     'license': 'AGPL-3',
     'installable': True,

@@ -7,6 +7,7 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="customer_name" string="Customer Name" attrs="{'invisible': [('type_product','!=','custom')]}" readonly="1"/>
                 <field name="type_product" string="Product Type" readonly="1"/>
+                <field name="origin"/>
             </xpath>
             <field name="quantity" position="after">
                 <field name="type_product" invisible="1"/>

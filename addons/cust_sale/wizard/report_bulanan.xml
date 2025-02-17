@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_sales_report_monthly_xlsx_form" model="ir.ui.view">
+        <field name="name">sales.report.monthly.xlsx.form</field>
+        <field name="model">sales.report.monthly.xlsx</field>
+        <field name="arch" type="xml">
+            <form string="Generate Monthly Sales Report">
+                <group>
+                    <field name="report_month"/>
+                </group>
+                <footer>
+                    <button name="generate_xlsx_report" string="Download Report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sales_report_monthly_xlsx" model="ir.actions.act_window">
+        <field name="name">Monthly Sales Report</field>
+        <field name="res_model">sales.report.monthly.xlsx</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem id="menu_sales_report_bulanan_xlsx" name="Laporan Penjualan Bulanan" parent="sale.menu_sale_report" action="action_sales_report_monthly_xlsx" sequence="3"/>
+</odoo>

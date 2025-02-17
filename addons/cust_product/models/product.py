@@ -8,8 +8,21 @@ class AccountMove(models.Model):
         ('custom', 'Custom'),
     ], store=True)
 
+    # detailed_type = fields.Selection([
+    #     ('consu', 'Consumable'),
+    #     ('service', 'Service'),
+    #     ('store', 'Storable Product'),
+    # ], store=True)
+
+    stock = fields.Integer(store=True, string="Stock")
+
 
 class AccountMove(models.Model):
     _inherit = "product.product"
     
     type_product = fields.Selection(related='product_tmpl_id.type_product', store=True)
+    # detailed_type = fields.Selection([
+    #     ('consu', 'Consumable'),
+    #     ('service', 'Service'),
+    #     ('store', 'Storable Product'),
+    # ], store=True)

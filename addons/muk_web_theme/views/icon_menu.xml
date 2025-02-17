@@ -4,8 +4,8 @@
         <menuitem id="base.menu_administration" name="Settings"
                   web_icon="muk_web_theme,static/img/settings.png"/>
         <menuitem id="base.menu_management" name="Apps" web_icon="muk_web_theme,static/img/apps.png"/>
-        <menuitem id="contacts.menu_contacts" name="Contacs" web_icon="muk_web_theme,static/img/contact.png"/>
-        <menuitem id="calendar.mail_menu_calendar" name="Calendar" web_icon="muk_web_theme,static/img/calendar.png"/>
+        <!-- <menuitem id="contacts.menu_contacts" name="Contacs" web_icon="muk_web_theme,static/img/contact.png"/> -->
+        <!-- <menuitem id="calendar.mail_menu_calendar" name="Calendar" web_icon="muk_web_theme,static/img/calendar.png"/> -->
         <menuitem id="sale.sale_menu_root" name="Sales" web_icon="muk_web_theme,static/img/sales.png"/>
         <menuitem id="account.menu_finance" name="Invoicing" web_icon="muk_web_theme,static/img/invoice.png"/>
         <menuitem id="website.menu_website_configuration" name="Website" web_icon="muk_web_theme,static/img/website.png"/>

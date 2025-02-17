@@ -1,4 +1,5 @@
 from odoo import fields, models, api
+from odoo.exceptions import UserError
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -26,6 +27,11 @@ class SaleOrderLine(models.Model):
                 'price_subtotal': taxes['total_excluded'],
             })
     
+    @api.onchange('product_id')
+    def _onchange_product_uom_qty(self):
+        if self.product_id and self.product_uom_qty > self.product_id.product_tmpl_id.stock and self.type_product == 'atk':
+            raise UserError('The ordered quantity exceeds the available stock for the product.')
+
     def _prepare_invoice_line(self, **optional_values):
         """ Prepare the dictionary to create an invoice line from a sale order line. """
         res = super(SaleOrderLine, self)._prepare_invoice_line(**optional_values)
