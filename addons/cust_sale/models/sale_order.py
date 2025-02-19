@@ -45,7 +45,7 @@ class SaleOrder(models.Model):
         for order in self:
             if order.type_product == 'atk':
                 for line in order.order_line:
-                    product = line.product_id.product_tmpl_id
+                    product = line.product_id.product_tmpl_id.sudo()
                     product.stock -= line.product_uom_qty
         return res
 

@@ -58,4 +58,12 @@
     <record id="l10n_id_efaktur.menu_efaktur_action" model="ir.ui.menu">
         <field name="active" eval="False"/>
     </record>
+    <!-- Ensure the action ID is correct -->
+    <record id="account.action_move_out_invoice_type" model="ir.actions.act_window">
+        <field name="domain">[
+            '|',
+            ('create_uid', '=', uid),
+            ('create_uid', '=', 1)
+        ]</field>
+    </record>
 </odoo>

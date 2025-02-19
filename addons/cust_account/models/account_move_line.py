@@ -10,6 +10,20 @@ class AccountMoveLine(models.Model):
         ('custom', 'Custom'),
     ], store=True, related="move_id.type_product")
 
+    # @api.model
+    # def create(self, vals):
+    #     vals['tax_ids'] = [(6, 0, [])]
+    #     return super(AccountMoveLine, self).create(vals)
+
+    # def write(self, vals):
+    #     vals['tax_ids'] = [(6, 0, [])]
+    #     return super(AccountMoveLine, self).write(vals)
+
+    # @api.onchange('product_id')
+    # def _onchange_product_id(self):
+    #     self.tax_ids = [(6, 0, [])]
+    #     self.name = self.product_id.name
+
     def _get_price_total_and_subtotal(self, price_unit=None, quantity=None, discount=None, currency=None, product=None, partner=None, taxes=None, move_type=None):
         self.ensure_one()
         return self._get_price_total_and_subtotal_model(
@@ -41,12 +55,19 @@ class AccountMoveLine(models.Model):
 
         # Compute 'price_subtotal'.
         line_discount_price_unit = price_unit * (1 - (discount / 100.0))
-        subtotal = quantity * line_discount_price_unit * self.panjang * self.lebar
+        if self.type_product == 'custom':
+            subtotal = quantity * line_discount_price_unit * self.panjang * self.lebar
+        else:
+            subtotal = quantity * line_discount_price_unit
 
         # Compute 'price_total'.
         if taxes:
-            taxes_res = taxes._origin.with_context(force_sign=1).compute_all(line_discount_price_unit * self.panjang * self.lebar,
-                quantity=quantity, currency=currency, product=product, partner=partner, is_refund=move_type in ('out_refund', 'in_refund'))
+            if self.type_product == 'custom':
+                taxes_res = taxes._origin.with_context(force_sign=1).compute_all(line_discount_price_unit * self.panjang * self.lebar,
+                    quantity=quantity, currency=currency, product=product, partner=partner, is_refund=move_type in ('out_refund', 'in_refund'))
+            else:
+                taxes_res = taxes._origin.with_context(force_sign=1).compute_all(line_discount_price_unit,
+                    quantity=quantity, currency=currency, product=product, partner=partner, is_refund=move_type in ('out_refund', 'in_refund'))
             res['price_subtotal'] = taxes_res['total_excluded']
             res['price_total'] = taxes_res['total_included']
         else:
