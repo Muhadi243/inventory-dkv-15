@@ -1,0 +1,30 @@
+<odoo>
+    <record id="view_jenis_barang_tree" model="ir.ui.view">
+        <field name="name">inventaris.jenis_barang.tree</field>
+        <field name="model">inventaris.jenis_barang</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_jenis_barang_form" model="ir.ui.view">
+        <field name="name">inventaris.jenis_barang.form</field>
+        <field name="model">inventaris.jenis_barang</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_jenis_barang" model="ir.actions.act_window">
+        <field name="name">Jenis Barang</field>
+        <field name="res_model">inventaris.jenis_barang</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_jenis_barang_tree"/>
+    </record>
+</odoo>

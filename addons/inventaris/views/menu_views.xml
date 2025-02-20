@@ -1,0 +1,10 @@
+<odoo>
+    <menuitem id="menu_inventaris_root" name="Inventaris"  action="action_inventaris" sequence="1"/>
+
+    <menuitem id="menu_inventaris_data" name="Data Inventaris" parent="menu_inventaris_root" sequence="2"/>
+
+    <menuitem id="menu_barang" name="Barang" parent="menu_inventaris_data" action="action_barang" sequence="3"/>
+    <menuitem id="menu_lokasi" name="Lokasi" parent="menu_inventaris_data" action="action_lokasi" sequence="4"/>
+    <menuitem id="menu_jenis_barang" name="Jenis Barang" parent="menu_inventaris_data" action="action_jenis_barang" sequence="5"/>
+    <menuitem id="menu_inventaris" name="Inventaris" parent="menu_inventaris_data" action="action_inventaris" sequence="6"/>
+</odoo>

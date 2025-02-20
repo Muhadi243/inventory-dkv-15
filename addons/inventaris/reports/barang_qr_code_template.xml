@@ -1,0 +1,12 @@
+<odoo>
+    <template id="report_barang_qr_code">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div style="display: inline-block; margin: 10px; text-align: center; border: 2px solid black; padding: 5px;">
+                    <img t-att-src="'data:image/png;base64,%s' % doc.qr_code.decode('utf-8')" style="width: 100px; height: 100px;"/>
+                    <p><t t-esc="doc.kode_barang"/></p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

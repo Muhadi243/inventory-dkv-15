@@ -1,0 +1,30 @@
+<odoo>
+    <record id="view_lokasi_tree" model="ir.ui.view">
+        <field name="name">inventaris.lokasi.tree</field>
+        <field name="model">inventaris.lokasi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nama_lokasi"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_lokasi_form" model="ir.ui.view">
+        <field name="name">inventaris.lokasi.form</field>
+        <field name="model">inventaris.lokasi</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="nama_lokasi"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lokasi" model="ir.actions.act_window">
+        <field name="name">Lokasi</field>
+        <field name="res_model">inventaris.lokasi</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_lokasi_tree"/>
+    </record>
+</odoo>

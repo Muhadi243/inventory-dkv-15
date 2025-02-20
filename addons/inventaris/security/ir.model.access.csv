@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_barang,inventaris.barang,model_inventaris_barang,,1,1,1,1
+access_lokasi,inventaris.lokasi,model_inventaris_lokasi,,1,1,1,1
+access_jenis_barang,inventaris.jenis_barang,model_inventaris_jenis_barang,,1,1,1,1
+access_inventaris,inventaris.inventaris,model_inventaris_inventaris,,1,1,1,1
