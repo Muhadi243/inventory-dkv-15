@@ -5,6 +5,7 @@
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="harga_beli" string="Harga Beli" widget="monetary"/>
                 <field name="type_product" string="Product Type"/>
                 <field name="stock"/>
             </xpath>

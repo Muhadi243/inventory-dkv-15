@@ -3,71 +3,144 @@ from datetime import datetime, timedelta
 import io
 import xlsxwriter
 import base64
-from odoo.http import content_disposition, request
-from odoo.tools import date_utils
 from collections import defaultdict
-
 
 class SalesReportMonthlyXlsx(models.TransientModel):
     _name = 'sales.report.monthly.xlsx'
     _description = 'Monthly Sales Report in Excel'
 
-    report_month = fields.Date(string="Report Month", default=fields.Date.context_today)
+    start_date = fields.Date(string="Start Date", required=True)
+    end_date = fields.Date(string="End Date", required=True)
 
     def generate_xlsx_report(self):
-        """Method to generate the Excel report for monthly sales."""
-        start_date = self.report_month.replace(day=1)
-        end_date = (start_date + timedelta(days=32)).replace(day=1) - timedelta(days=1)
-        
+        """Method to generate the Excel report for monthly sales and purchases."""
         sale_orders = self.env['sale.order'].search([
-            ('date_order', '>=', start_date),
-            ('date_order', '<=', end_date),
+            ('date_order', '>=', self.start_date),
+            ('date_order', '<=', self.end_date),
             ('state', 'in', ['sale', 'done'])
+        ])
+        
+        purchase_orders = self.env['purchase.order'].search([
+            ('date_order', '>=', self.start_date),
+            ('date_order', '<=', self.end_date),
+            ('state', 'in', ['purchase', 'done'])
         ])
         
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
-        sheet = workbook.add_worksheet("Monthly Sales Report")
+        sales_sheet = workbook.add_worksheet("Sales Report")
+        purchase_sheet = workbook.add_worksheet("Purchase Report")
         
         # Define Styles
-        bold = workbook.add_format({'bold': True, 'bg_color': '#FFFF99'})
-        date_format = workbook.add_format({'num_format': 'yyyy-mm-dd'})
+        bold = workbook.add_format({'bold': True, 'bg_color': '#FFFF99', 'border': 1, 'align': 'center'})
+        date_format = workbook.add_format({'num_format': 'yyyy-mm-dd', 'border': 1, 'align': 'center'})
+        data_format = workbook.add_format({'border': 1, 'align': 'center'})
+        header_format = workbook.add_format({'bold': True, 'bg_color': '#D3D3D3', 'border': 1, 'align': 'center'})
 
-        # Write Headers
-        headers = ["Product", "Type", "Stock", "Total Sold", "Total Price"]
-        sheet.write_row(0, 0, headers, bold)
+        # Write Sales Headers
+        sales_headers = [
+            "Product", "Date", "Time", "Harga Awal", "Harga Jual", "Panjang", "Lebar", 
+            "Quantity Penjualan", "Total Kotor Penjualan", "Profit", "Operator/Mar (20%)", 
+            "Operator/Mesin (10%)", "BC (30%/60%)", "Operasional (20%)", "Sekolah (20%)"
+        ]
+        sales_sheet.write_row(0, 0, sales_headers, header_format)
 
-        product_data = defaultdict(lambda: {'price': 0, 'type': '', 'stock': 0, 'sold': 0})
-        
+        sales_row = 1
         for order in sale_orders:
             for line in order.order_line:
-                if line.product_id:
-                    product_type = line.product_id.type_product
-                    if product_type in ['atk', 'custom']:
-                        product_name = line.product_id.name or ""
-                        product_data[product_name]['price'] += line.price_total
-                        product_data[product_name]['type'] = product_type
-                        product_data[product_name]['stock'] = line.product_id.product_tmpl_id.stock
-                        product_data[product_name]['sold'] += line.product_uom_qty
+                if line.product_id and line.product_id.type_product in ['atk', 'custom']:
+                    product_name = line.product_id.name or ""
+                    harga_awal = line.product_id.product_tmpl_id.harga_beli
+                    harga_jual = line.product_id.list_price
+                    panjang = line.panjang if line.product_id.type_product == 'custom' else '-'
+                    lebar = line.lebar if line.product_id.type_product == 'custom' else '-'
+                    quantity_penjualan = line.product_uom_qty
+                    order_date = order.date_order
+                    order_time = (order.date_order + timedelta(hours=7)).strftime('%H:%M:%S')
 
-        row = 1
-        total_price = 0
-        total_sold = 0
-        for product_name, data in product_data.items():
-            product_type = dict(line.product_id._fields['type_product'].selection(line.product_id)).get(data['type'], "")
-            sheet.write(row, 0, product_name)
-            sheet.write(row, 1, product_type)
-            sheet.write(row, 2, data['stock'])
-            sheet.write(row, 3, data['sold'])
-            sheet.write(row, 4, data['price'])
-            total_price += data['price']
-            total_sold += data['sold']
-            row += 1
+                    # Calculate Total Kotor Penjualan
+                    if line.product_id.type_product == 'custom':
+                        total_kotor_penjualan = harga_jual * panjang * lebar * quantity_penjualan
+                    else:
+                        total_kotor_penjualan = harga_jual * quantity_penjualan
 
-        # Write Totals with colspan
-        sheet.merge_range(row, 0, row, 2, "Total", bold)
-        sheet.write(row, 3, total_sold, bold)
-        sheet.write(row, 4, total_price, bold)
+                    # Calculate Profit
+                    if line.product_id.type_product == 'custom':
+                        profit = total_kotor_penjualan - (harga_awal * quantity_penjualan)
+                    else:
+                        profit = total_kotor_penjualan - (harga_awal * quantity_penjualan)
+
+                    operator_mar = profit * 0.2 if line.product_id.type_product == 'custom' else '-'
+                    operator_mesin = profit * 0.1 if line.product_id.type_product == 'custom' else '-'
+                    bc = profit * 0.3 if line.product_id.type_product == 'atk' else profit * 0.6
+                    operasional = profit * 0.2
+                    sekolah = profit * 0.2
+
+                    # Write data to Excel
+                    sales_sheet.write(sales_row, 0, product_name, data_format)
+                    sales_sheet.write(sales_row, 1, order_date, date_format)
+                    sales_sheet.write(sales_row, 2, order_time, data_format)
+                    sales_sheet.write(sales_row, 3, harga_awal, data_format)
+                    sales_sheet.write(sales_row, 4, harga_jual, data_format)
+                    sales_sheet.write(sales_row, 5, panjang, data_format)
+                    sales_sheet.write(sales_row, 6, lebar, data_format)
+                    sales_sheet.write(sales_row, 7, quantity_penjualan, data_format)
+                    sales_sheet.write(sales_row, 8, total_kotor_penjualan, data_format)  # Total Kotor Penjualan
+                    sales_sheet.write(sales_row, 9, profit, data_format)
+                    sales_sheet.write(sales_row, 10, operator_mar, data_format)
+                    sales_sheet.write(sales_row, 11, operator_mesin, data_format)
+                    sales_sheet.write(sales_row, 12, bc, data_format)
+                    sales_sheet.write(sales_row, 13, operasional, data_format)
+                    sales_sheet.write(sales_row, 14, sekolah, data_format)
+                    sales_row += 1
+
+        # Write Purchase Headers
+        purchase_headers = ["Product", "Date", "Time", "Quantity Pembelian", "Total Price"]
+        sales_sheet.write_row(0, 16, purchase_headers, header_format)
+
+        purchase_row = 1
+        for order in purchase_orders:
+            for line in order.order_line:
+                if line.product_id and line.product_id.type_product in ['atk', 'custom']:
+                    product_name = line.product_id.name or ""
+                    order_time = (order.date_order + timedelta(hours=7)).strftime('%H:%M:%S')
+                    quantity_pembelian = line.product_qty
+                    total_price = line.price_total
+
+                    sales_sheet.write(purchase_row, 16, product_name, data_format)
+                    sales_sheet.write(purchase_row, 17, order.date_order, date_format)
+                    sales_sheet.write(purchase_row, 18, order_time, data_format)
+                    sales_sheet.write(purchase_row, 19, quantity_pembelian, data_format)
+                    sales_sheet.write(purchase_row, 20, total_price, data_format)
+                    purchase_row += 1
+
+        # Calculate monthly totals (gross sales and purchases)
+        monthly_totals = defaultdict(lambda: {'sales': 0, 'purchases': 0})
+        for order in sale_orders:
+            month = order.date_order.strftime('%Y-%m')
+            for line in order.order_line:
+                if line.product_id and line.product_id.type_product in ['atk', 'custom']:
+                    if line.product_id.type_product == 'custom':
+                        total_sales = line.product_id.list_price * line.panjang * line.lebar * line.product_uom_qty
+                    else:
+                        total_sales = line.product_id.list_price * line.product_uom_qty
+                    monthly_totals[month]['sales'] += total_sales
+
+        for order in purchase_orders:
+            month = order.date_order.strftime('%Y-%m')
+            for line in order.order_line:
+                if line.product_id and line.product_id.type_product in ['atk', 'custom']:
+                    monthly_totals[month]['purchases'] += line.price_total
+
+        # Write Monthly Totals
+        sales_sheet.write_row(sales_row + 2, 0, ["Month", "Total Sales (Gross)", "Total Purchases (Gross)", "Total (Sales - Purchases)"], header_format)
+        for month, totals in monthly_totals.items():
+            sales_sheet.write_row(sales_row + 3, 0, [month, totals['sales'], totals['purchases'], totals['sales'] - totals['purchases']], data_format)
+            
+            # Add Profit Row (Total Sales - Purchases)
+            sales_sheet.write(sales_row + 4, 0, "Profit", header_format)
+            sales_sheet.write(sales_row + 4, 3, totals['sales'] - totals['purchases'], data_format)
+            sales_row += 3  # Move to the next month's data
 
         workbook.close()
         output.seek(0)

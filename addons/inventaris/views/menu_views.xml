@@ -1,5 +1,5 @@
 <odoo>
-    <menuitem id="menu_inventaris_root" name="Inventaris"  action="action_inventaris" sequence="1"/>
+    <menuitem id="menu_inventaris_root" name="Inventaris"  action="action_inventaris" sequence="31"/>
 
     <menuitem id="menu_inventaris_data" name="Data Inventaris" parent="menu_inventaris_root" sequence="2"/>
 

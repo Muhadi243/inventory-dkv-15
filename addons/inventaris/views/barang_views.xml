@@ -1,12 +1,12 @@
 <odoo>
     <record id="view_barang_tree" model="ir.ui.view">
         <field name="name">inventaris.barang.tree</field>
-        <field name="model">inventaris.barang</field>
+        <field name="model">product.template</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="nama_barang"/>
+                <field name="name"/>
                 <field name="merk_barang"/>
-                <field name="kode_barang"/>
+                <field name="default_code"/>
                 <field name="id_jenis_barang"/>
                 <field name="qr_code"/>
             </tree>
@@ -15,23 +15,21 @@
 
     <record id="view_barang_form" model="ir.ui.view">
         <field name="name">inventaris.barang.form</field>
-        <field name="model">inventaris.barang</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
-            <form>
-                <group>
-                    <field name="nama_barang"/>
-                    <field name="merk_barang"/>
-                    <field name="kode_barang"/>
-                    <field name="id_jenis_barang"/>
-                    <field name="qr_code" widget="image" options="{'size': (128, 128)}"/>
-                </group>
-            </form>
+            <field name="stock" position="after">
+                <field name="merk_barang"/>
+                <field name="default_code"/>
+                <field name="id_jenis_barang"/>
+                <field name="qr_code" widget="image" options="{'size': (128, 128)}"/>
+            </field>
         </field>
     </record>
 
     <record id="action_barang" model="ir.actions.act_window">
         <field name="name">Barang</field>
-        <field name="res_model">inventaris.barang</field>
+        <field name="res_model">product.template</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_barang_tree"/>
     </record>

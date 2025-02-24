@@ -30,7 +30,7 @@
     'author': 'Dimas',
     'company': 'Dimas',
     'maintainer': 'Dimas',
-    'depends': ['base','sale','sales_team'],
+    'depends': ['base','sale','sales_team', 'mail'],
     'data': [
         'security/ir.model.access.csv',
         'views/sale_order.xml',

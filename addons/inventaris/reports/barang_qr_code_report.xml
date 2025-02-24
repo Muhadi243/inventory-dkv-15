@@ -13,12 +13,12 @@
 
     <report
         id="action_report_barang_qr_code"
-        model="inventaris.barang"
+        model="product.template"
         string="Print QR Code"
         report_type="qweb-pdf"
         name="inventaris.report_barang_qr_code"
         file="inventaris.report_barang_qr_code"
-        print_report_name="'QR Code - %s' % (object.kode_barang)"
+        print_report_name="'QR Code - %s' % (object.default_code)"
         paperformat="paperformat_qr_code"
     />
 </odoo>

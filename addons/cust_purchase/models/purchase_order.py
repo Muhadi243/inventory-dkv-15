@@ -3,6 +3,12 @@ from odoo import fields, models, api
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
+    type_product = fields.Selection([
+        ('atk', 'ATK'),
+        ('custom', 'Custom'),
+        ('store', 'Storeable'),
+    ], store=True)
+
     def action_set_quantities(self):
         for line in self.order_line:
             line.qty_received = line.product_qty

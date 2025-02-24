@@ -1,11 +1,12 @@
 from odoo import fields, models, api
 
-class AccountMove(models.Model):
+class ProductTemplate(models.Model):
     _inherit = "product.template"
     
     type_product = fields.Selection([
         ('atk', 'ATK'),
         ('custom', 'Custom'),
+        ('store', 'Storeable'),
     ], store=True)
 
     # detailed_type = fields.Selection([
@@ -15,9 +16,10 @@ class AccountMove(models.Model):
     # ], store=True)
 
     stock = fields.Integer(store=True, string="Stock")
+    harga_beli = fields.Float(string="Harga Beli", store=True)
 
 
-class AccountMove(models.Model):
+class ProductProduct(models.Model):
     _inherit = "product.product"
     
     type_product = fields.Selection(related='product_tmpl_id.type_product', store=True)

@@ -8,7 +8,7 @@
         <!-- <menuitem id="calendar.mail_menu_calendar" name="Calendar" web_icon="muk_web_theme,static/img/calendar.png"/> -->
         <menuitem id="sale.sale_menu_root" name="Sales" web_icon="muk_web_theme,static/img/sales.png"/>
         <menuitem id="account.menu_finance" name="Invoicing" web_icon="muk_web_theme,static/img/invoice.png"/>
-        <menuitem id="website.menu_website_configuration" name="Website" web_icon="muk_web_theme,static/img/website.png"/>
+        <!-- <menuitem id="website.menu_website_configuration" name="Website" web_icon="muk_web_theme,static/img/website.png"/> -->
         <menuitem id="purchase.menu_purchase_root" name="Purchase" web_icon="muk_web_theme,static/img/purchase.png"/>
         <menuitem id="utm.menu_link_tracker_root" name="Link Tracker" web_icon="muk_web_theme,static/img/link.png"/>
         <menuitem id="mail.menu_root_discuss" name="Discuss"

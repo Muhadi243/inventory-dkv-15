@@ -19,11 +19,6 @@ class SaleOrder(models.Model):
             else:
                 order.type_product = 'atk'
 
-    def _inverse_type_product(self):
-        for order in self:
-            if not order.type_product:
-                order.type_product = 'atk' if self.env.user.type_user == 'atk' else False
-
     def _prepare_invoice(self):
         """
         Prepare the dict of values to create the new invoice for a sales order.

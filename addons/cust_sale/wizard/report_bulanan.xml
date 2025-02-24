@@ -5,7 +5,8 @@
         <field name="arch" type="xml">
             <form string="Generate Monthly Sales Report">
                 <group>
-                    <field name="report_month"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
                 </group>
                 <footer>
                     <button name="generate_xlsx_report" string="Download Report" type="object" class="btn-primary"/>

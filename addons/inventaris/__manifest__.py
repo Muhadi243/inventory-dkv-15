@@ -7,7 +7,7 @@
     'author': 'Your Name',
     'company': 'Your Company',
     'maintainer': 'Your Name',
-    'depends': ['base'],
+    'depends': ['base', 'product'],
     'data': [
         'security/ir.model.access.csv',
         'views/barang_views.xml',
