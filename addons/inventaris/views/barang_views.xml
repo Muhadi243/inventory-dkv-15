@@ -31,6 +31,7 @@
         <field name="name">Barang</field>
         <field name="res_model">product.template</field>
         <field name="view_mode">tree,form</field>
+        <field name="domain">[('type_product', '=', 'store')]</field>
         <field name="view_id" ref="view_barang_tree"/>
     </record>
 </odoo>

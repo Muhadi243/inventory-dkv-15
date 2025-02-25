@@ -32,7 +32,10 @@
     'maintainer': 'Dimas',
     'depends': ['base','account', 'l10n_id_efaktur'],
     'data': [
+        'security/ir.model.access.csv',
         'views/account_move.xml',
+        'views/account_payment_register.xml',
+        'views/qrcode_master.xml',
         'report/report_invoices_template.xml',
         'report/report_invoices.xml',
     ],

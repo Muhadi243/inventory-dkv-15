@@ -61,6 +61,7 @@
     <!-- Ensure the action ID is correct -->
     <record id="account.action_move_out_invoice_type" model="ir.actions.act_window">
         <field name="domain">[
+            ('move_type', '=', 'out_invoice'),
             '|',
             ('create_uid', '=', uid),
             ('create_uid', '=', 1)

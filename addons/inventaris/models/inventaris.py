@@ -32,7 +32,7 @@ class Inventaris(models.Model):
         for record in inventaris_records:
             inventaris_details.append({
                 'id_inventaris': record.id,
-                'id_barang': record.id_barang,
+                'id_barang': record.id_barang.id,
                 'nama_jenis_barang': record.id_barang.id_jenis_barang.name,
                 'nama_barang': record.id_barang.name,
                 'merek': record.id_barang.merk_barang,
@@ -40,7 +40,7 @@ class Inventaris(models.Model):
                 'qrcode_image': record.id_barang.qr_code,
                 'stok_barang': record.id_barang.stock,
                 'id_ruangan': record.id_lokasi.id,
-                'nama_ruangan': record.id_lokasi.name,
+                'nama_ruangan': record.id_lokasi.nama_lokasi,
                 'jumlah_barang': record.jumlah_barang,
                 'kondisi_barang': record.kondisi_barang,
                 # 'ket_barang': record.ket_barang,
