@@ -33,4 +33,11 @@
             </xpath>
         </field>
     </record>
+    <record id="purchase.menu_purchase_root" model="ir.ui.menu">
+        <field name="name">Pembelian</field>
+    </record>
+    <record id="purchase.menu_product_category_config_purchase" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    
 </odoo>

@@ -22,5 +22,5 @@
         <field name="target">new</field>
     </record>
     
-    <menuitem id="menu_daily_purchase_report_xlsx" name="Laporan Pengeluaran Harian" parent="purchase.purchase_report_main" action="action_daily_purchase_report_xlsx" sequence="5"/>
+    <!-- <menuitem id="menu_daily_purchase_report_xlsx" name="Laporan Pengeluaran Harian" parent="purchase.purchase_report_main" action="action_daily_purchase_report_xlsx" sequence="5"/> -->
 </odoo>

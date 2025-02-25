@@ -8,6 +8,7 @@
                 <group>
                     <!-- <label for="type_user" string="User Product Type"/> -->
                     <field name="type_user"/>
+                    <field name="akses_inventaris"/>
                 </group>
             </xpath>
         </field>

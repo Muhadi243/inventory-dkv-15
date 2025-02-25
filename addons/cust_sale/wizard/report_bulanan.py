@@ -39,11 +39,16 @@ class SalesReportMonthlyXlsx(models.TransientModel):
 
         # Write Sales Headers
         sales_headers = [
-            "Product", "Date", "Time", "Harga Awal", "Harga Jual", "Panjang", "Lebar", 
-            "Quantity Penjualan", "Total Kotor Penjualan", "Profit", "Operator/Mar (20%)", 
-            "Operator/Mesin (10%)", "BC (30%/60%)", "Operasional (20%)", "Sekolah (20%)"
+            "Product", "Date", "Time", "Operator", "Harga Awal", "Harga Jual", "Panjang", "Lebar", 
+            "Quantity Penjualan", "Total Kotor Penjualan", "Profit", "Operator/Mar", 
+            "Operator/Mesin", "BC", "Operasional", "Sekolah"
         ]
         sales_sheet.write_row(0, 0, sales_headers, header_format)
+
+        # Fetch profit percentages
+        profit_percentage = self.env['profit.percentage'].search([], limit=1)
+        if not profit_percentage:
+            raise ValueError("Profit percentage data is not configured.")
 
         sales_row = 1
         for order in sale_orders:
@@ -57,6 +62,7 @@ class SalesReportMonthlyXlsx(models.TransientModel):
                     quantity_penjualan = line.product_uom_qty
                     order_date = order.date_order
                     order_time = (order.date_order + timedelta(hours=7)).strftime('%H:%M:%S')
+                    operator_name = order.operator_id.name if order.operator_id else '-'
 
                     # Calculate Total Kotor Penjualan
                     if line.product_id.type_product == 'custom':
@@ -67,36 +73,40 @@ class SalesReportMonthlyXlsx(models.TransientModel):
                     # Calculate Profit
                     if line.product_id.type_product == 'custom':
                         profit = total_kotor_penjualan - (harga_awal * quantity_penjualan)
+                        bc = profit * (profit_percentage.bc_custom / 100)
+                        operasional = profit * (profit_percentage.operasional_custom / 100)
+                        sekolah = profit * (profit_percentage.sekolah_custom / 100)
                     else:
                         profit = total_kotor_penjualan - (harga_awal * quantity_penjualan)
+                        bc = profit * (profit_percentage.bc_atk / 100)
+                        operasional = profit * (profit_percentage.operasional_atk / 100)
+                        sekolah = profit * (profit_percentage.sekolah_atk / 100)
 
-                    operator_mar = profit * 0.2 if line.product_id.type_product == 'custom' else '-'
-                    operator_mesin = profit * 0.1 if line.product_id.type_product == 'custom' else '-'
-                    bc = profit * 0.3 if line.product_id.type_product == 'atk' else profit * 0.6
-                    operasional = profit * 0.2
-                    sekolah = profit * 0.2
+                    operator_mar = profit * (profit_percentage.operator_mar / 100) if line.product_id.type_product == 'custom' else '-'
+                    operator_mesin = profit * (profit_percentage.operator_mesin / 100) if line.product_id.type_product == 'custom' else '-'
 
                     # Write data to Excel
                     sales_sheet.write(sales_row, 0, product_name, data_format)
                     sales_sheet.write(sales_row, 1, order_date, date_format)
                     sales_sheet.write(sales_row, 2, order_time, data_format)
-                    sales_sheet.write(sales_row, 3, harga_awal, data_format)
-                    sales_sheet.write(sales_row, 4, harga_jual, data_format)
-                    sales_sheet.write(sales_row, 5, panjang, data_format)
-                    sales_sheet.write(sales_row, 6, lebar, data_format)
-                    sales_sheet.write(sales_row, 7, quantity_penjualan, data_format)
-                    sales_sheet.write(sales_row, 8, total_kotor_penjualan, data_format)  # Total Kotor Penjualan
-                    sales_sheet.write(sales_row, 9, profit, data_format)
-                    sales_sheet.write(sales_row, 10, operator_mar, data_format)
-                    sales_sheet.write(sales_row, 11, operator_mesin, data_format)
-                    sales_sheet.write(sales_row, 12, bc, data_format)
-                    sales_sheet.write(sales_row, 13, operasional, data_format)
-                    sales_sheet.write(sales_row, 14, sekolah, data_format)
+                    sales_sheet.write(sales_row, 3, operator_name, data_format)
+                    sales_sheet.write(sales_row, 4, harga_awal, data_format)
+                    sales_sheet.write(sales_row, 5, harga_jual, data_format)
+                    sales_sheet.write(sales_row, 6, panjang, data_format)
+                    sales_sheet.write(sales_row, 7, lebar, data_format)
+                    sales_sheet.write(sales_row, 8, quantity_penjualan, data_format)
+                    sales_sheet.write(sales_row, 9, total_kotor_penjualan, data_format)  # Total Kotor Penjualan
+                    sales_sheet.write(sales_row, 10, profit, data_format)
+                    sales_sheet.write(sales_row, 11, operator_mar, data_format)
+                    sales_sheet.write(sales_row, 12, operator_mesin, data_format)
+                    sales_sheet.write(sales_row, 13, bc, data_format)
+                    sales_sheet.write(sales_row, 14, operasional, data_format)
+                    sales_sheet.write(sales_row, 15, sekolah, data_format)
                     sales_row += 1
 
         # Write Purchase Headers
         purchase_headers = ["Product", "Date", "Time", "Quantity Pembelian", "Total Price"]
-        sales_sheet.write_row(0, 16, purchase_headers, header_format)
+        sales_sheet.write_row(0, 17, purchase_headers, header_format)
 
         purchase_row = 1
         for order in purchase_orders:
@@ -107,11 +117,11 @@ class SalesReportMonthlyXlsx(models.TransientModel):
                     quantity_pembelian = line.product_qty
                     total_price = line.price_total
 
-                    sales_sheet.write(purchase_row, 16, product_name, data_format)
-                    sales_sheet.write(purchase_row, 17, order.date_order, date_format)
-                    sales_sheet.write(purchase_row, 18, order_time, data_format)
-                    sales_sheet.write(purchase_row, 19, quantity_pembelian, data_format)
-                    sales_sheet.write(purchase_row, 20, total_price, data_format)
+                    sales_sheet.write(purchase_row, 17, product_name, data_format)
+                    sales_sheet.write(purchase_row, 18, order.date_order, date_format)
+                    sales_sheet.write(purchase_row, 19, order_time, data_format)
+                    sales_sheet.write(purchase_row, 20, quantity_pembelian, data_format)
+                    sales_sheet.write(purchase_row, 21, total_price, data_format)
                     purchase_row += 1
 
         # Calculate monthly totals (gross sales and purchases)

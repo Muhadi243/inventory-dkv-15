@@ -36,7 +36,6 @@
         'views/purchase_order.xml',
         'wizard/report_bulanan.xml',
         'wizard/report_harian.xml',
-        'wizard/report_pengeluaran.xml',
     ],
     'license': 'AGPL-3',
     'installable': True,

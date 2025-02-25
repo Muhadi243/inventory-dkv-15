@@ -5,9 +5,9 @@
             <t t-foreach="docs" t-as="doc">
                 <main style="padding: 40px;">
                     <div class="page" style="padding: 20px; font-family: Arial, sans-serif;">
-                        <div style="background-color: #D2D0D0; width: 100px; height: 100px;">
+                        <!-- <div style="background-color: #D2D0D0; width: 100px; height: 100px;">
                             <img src="../static/src/img/image.png"/>
-                        </div>
+                        </div> -->
                         <div class="text-center" style="text-align: center; background-color: #D2D0D0; padding-top: 20px; padding-bottom: 10px; margin-bottom: 20px;">
                             <h3>FAKTUR</h3>
                         </div>
@@ -72,20 +72,20 @@
                                     </tr>
                                 </t>
                                 <tr>
-                                    <td colspan="4" style="padding: 3px; text-align: right;"><strong>Sub Total</strong></td>
-                                    <td style="padding: 3px; text-align: right;">Rp. <span t-field="doc.amount_untaxed"/></td>
+                                    <td colspan="4" style="padding: 3px; text-align: left;"><strong>Sub Total</strong></td>
+                                    <td style="padding: 3px; text-align: left;"><span t-field="doc.amount_untaxed"/></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" style="padding: 3px; text-align: right;"><strong>Total</strong></td>
-                                    <td style="padding: 3px; text-align: right;">Rp. <span t-field="doc.amount_total"/></td>
+                                    <td colspan="4" style="padding: 3px; text-align: left;"><strong>Total</strong></td>
+                                    <td style="padding: 3px; text-align: left;"><span t-field="doc.amount_total"/></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" style="padding: 3px; text-align: right;"><strong>Pembayaran Dilakukan</strong></td>
-                                    <td style="padding: 3px; text-align: right;">Rp. </td>
+                                    <td colspan="4" style="padding: 3px; text-align: left;"><strong>Pembayaran Dilakukan</strong></td>
+                                    <td style="padding: 3px; text-align: left;">Rp. </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" style="padding: 3px; text-align: right;"><strong>Saldo Jatuh Tempo</strong></td>
-                                    <td style="padding: 3px; text-align: right;">Rp. </td>
+                                    <td colspan="4" style="padding: 3px; text-align: left;"><strong>Saldo Jatuh Tempo</strong></td>
+                                    <td style="padding: 3px; text-align: left;">Rp. </td>
                                 </tr>
                             </tbody>
                         </table>

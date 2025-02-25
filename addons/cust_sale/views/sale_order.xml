@@ -7,6 +7,7 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="customer_name" string="Customer Name" attrs="{'invisible': [('type_product','!=','custom')]}"/>
                 <field name="type_product" string="Product Type" readonly="0"/>
+                <field name="operator_id" string="Operator"/>
             </xpath>
             <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
                 <attribute name="domain">[('sale_ok', '=', True), ('type_product', '=', parent.type_product)]</attribute>
@@ -22,6 +23,15 @@
                 <attribute name="domain">[('sale_ok', '=', True), ('type_product', '=', type_product)]</attribute>
             </xpath> -->
              <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//label[@for='pricelist_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='update_prices']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
              <!-- <xpath expr="//field[@name='validity_date']" position="attributes">
@@ -64,6 +74,21 @@
     </record>
     <record id="mail.menu_root_discuss" model="ir.ui.menu">
         <field name="active">False</field>
+    </record>
+    <record id="utm.menu_link_tracker_root" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="sale.menu_product_pricelist_main" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="sale.sales_team_config" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="sale.sale_menu_config_activity_type" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="sale.sale_menu_root" model="ir.ui.menu">
+        <field name="name">Penjualan</field>
     </record>
 
     <!-- <record id="view_google_drive_config_form" model="ir.ui.view">

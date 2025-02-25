@@ -1,0 +1,49 @@
+<odoo>
+    <record id="action_profit_percentage" model="ir.actions.act_window">
+        <field name="name">Profit Percentage</field>
+        <field name="res_model">profit.percentage</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_profit_percentage" name="Profit Percentage" parent="sale.menu_sale_config" action="action_profit_percentage" sequence="3"/>
+    
+    <record id="view_profit_percentage_form" model="ir.ui.view">
+        <field name="name">profit.percentage.form</field>
+        <field name="model">profit.percentage</field>
+        <field name="arch" type="xml">
+            <form string="Profit Percentage">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="operator_mar"/>
+                        <field name="operator_mesin"/>
+                        <field name="bc_atk"/>
+                        <field name="bc_custom"/>
+                        <field name="operasional_atk"/>
+                        <field name="operasional_custom"/>
+                        <field name="sekolah_atk"/>
+                        <field name="sekolah_custom"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_profit_percentage_tree" model="ir.ui.view">
+        <field name="name">profit.percentage.tree</field>
+        <field name="model">profit.percentage</field>
+        <field name="arch" type="xml">
+            <tree string="Profit Percentage">
+                <field name="name"/>
+                <field name="operator_mar"/>
+                <field name="operator_mesin"/>
+                <field name="bc_atk"/>
+                <field name="bc_custom"/>
+                <field name="operasional_atk"/>
+                <field name="operasional_custom"/>
+                <field name="sekolah_atk"/>
+                <field name="sekolah_custom"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -67,4 +67,34 @@
             ('create_uid', '=', 1)
         ]</field>
     </record>
+    <record id="account.menu_action_tax_form" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="account.menu_action_incoterm_open" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="account.menu_action_account_fiscal_position_form" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="account.menu_action_account_journal_group_list" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="account.menu_action_tax_group" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="payment.payment_acquirer_menu" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="payment.payment_icon_menu" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="payment.payment_token_menu" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="payment.payment_transaction_menu" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+    <record id="account.menu_configure_tax_report" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
 </odoo>

@@ -30,7 +30,7 @@
     'author': 'Dimas',
     'company': 'Dimas',
     'maintainer': 'Dimas',
-    'depends': ['base','product'],
+    'depends': ['base','product', 'account'],
     'data': [
         'views/product_views.xml',
     ],

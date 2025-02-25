@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_sales_report_xlsx,sales.report.xlsx,model_sales_report_xlsx,,1,1,1,1
 access_sales_report_monthly_xlsx,sales.report.monthly.xlsx,model_sales_report_monthly_xlsx,,1,1,1,1
+access_profit_percentage,profit.percentage,model_profit_percentage,,1,1,1,1

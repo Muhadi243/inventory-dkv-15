@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_res_partner_operator_tree" model="ir.ui.view">
+        <field name="name">res.partner.operator.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Operators">
+                <field name="display_name" options="{'no_create': True, 'no_open': True}"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="is_operator"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_res_partner_operator" model="ir.actions.act_window">
+        <field name="name">Operators</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_operator', '=', True)]</field>
+    </record>
+
+    <menuitem id="menu_res_partner_operator" 
+              name="Operators" 
+              parent="sale.sale_order_menu" 
+              action="action_res_partner_operator" 
+              sequence="10"/>
+</odoo>

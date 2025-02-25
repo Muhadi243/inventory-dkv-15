@@ -23,5 +23,5 @@
         <field name="target">new</field>
     </record>
     
-    <menuitem id="menu_sales_report_bulanan_xlsx" name="Laporan Penjualan Bulanan" parent="sale.menu_sale_report" action="action_sales_report_monthly_xlsx" sequence="3"/>
+    <menuitem id="menu_sales_report_bulanan_xlsx" name="Laporan Penjualan dan Pengeluaran" parent="sale.menu_sale_report" action="action_sales_report_monthly_xlsx" sequence="3"/>
 </odoo>

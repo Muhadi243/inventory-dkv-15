@@ -1,5 +1,10 @@
 from odoo import fields, models, api
 
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+    is_operator = fields.Boolean(string="Is Operator")
+
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
     
@@ -8,6 +13,7 @@ class SaleOrder(models.Model):
         ('atk', 'ATK'),
         ('custom', 'Custom'),
     ], store=True, compute='_compute_type_product')
+    operator_id = fields.Many2one('res.partner', string="Operator", domain="[('is_operator', '=', True)]")
 
     @api.depends('user_id')
     def _compute_type_product(self):
@@ -43,4 +49,5 @@ class SaleOrder(models.Model):
                     product = line.product_id.product_tmpl_id.sudo()
                     product.stock -= line.product_uom_qty
         return res
+
 
