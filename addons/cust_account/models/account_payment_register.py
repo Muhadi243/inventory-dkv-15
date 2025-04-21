@@ -6,6 +6,13 @@ class AccountPaymentRegister(models.TransientModel):
     qrcode = fields.Many2one('qrcode.master', string="QR Code")
     image_qrcode = fields.Binary(string="QR Code Image")
     show_qrcode = fields.Boolean(default=False, string="Show QR Code")
+    journal_id = fields.Many2one(
+        'account.journal',
+        default=lambda self: self.env['account.journal'].search(
+            [('name', 'ilike', 'cash')],
+            limit=1
+        )
+    )
 
     @api.onchange('qrcode')
     def _onchange_image_qrcode(self):

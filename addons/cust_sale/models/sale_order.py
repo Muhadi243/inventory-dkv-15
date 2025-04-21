@@ -15,6 +15,25 @@ class SaleOrder(models.Model):
     ], store=True, compute='_compute_type_product')
     operator_id = fields.Many2one('res.partner', string="Operator", domain="[('is_operator', '=', True)]")
 
+        # Field yang akan diisi otomatis
+    partner_id = fields.Many2one(
+        'res.partner',
+        string='Customer',
+        store=True,
+        readonly=True,  # Biarkan bisa diubah manual
+        default=lambda self: self.env['res.partner'].search([('name', 'ilike', 'Customer')], limit=1).id
+    )
+
+    def _create_invoices(self, grouped=False, final=False, date=None):
+        # Buat invoice seperti biasa
+        moves = super(SaleOrder, self)._create_invoices(grouped=grouped, final=final, date=date)
+        
+        # Post semua invoice yang baru dibuat
+        if moves:
+            moves.action_post()  # Untuk Odoo 13+, versi lama pakai `moves.validate()`
+        
+        return moves
+
     @api.depends('user_id')
     def _compute_type_product(self):
         for order in self:
